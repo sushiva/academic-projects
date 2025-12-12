@@ -1,0 +1,35 @@
+# Deep Learning (let uv find Python 3.13 compatible versions)
+torch
+torchvision
+torchaudio
+
+# Data Processing
+numpy
+pandas
+Pillow
+opencv-python
+scikit-learn
+
+# Visualization
+matplotlib
+seaborn
+
+# Model Interpretability
+grad-cam
+
+# Progress Tracking
+tqdm
+
+# API
+fastapi
+uvicorn
+python-multipart
+
+# Deployment
+gradio
+
+# Experiment Tracking
+tensorboard
+
+# Utilities
+pyyaml

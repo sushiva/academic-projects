@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+*.egg-info/
+venv/
+env/
+
+# Data files (too large for git)
+*.npy
+*.csv
+data/processed/
+*/data/processed/
+*/data/raw/*.npy
+*/data/raw/*.csv
+
+# Model files (too large)
+*.pth
+models/checkpoints/
+*/models/*.pth
+*/models/checkpoints/*.pth
+
+# Training outputs
+*.log
+training_output.log
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
