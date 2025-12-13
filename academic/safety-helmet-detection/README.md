@@ -258,8 +258,8 @@ Academic project - for educational purposes only.
 
 ## 👤 Author
 
-**Your Name**
-📧 Email: your.email@example.com
+**Sudhir Shivaram**
+📧 Email: shivaram.sudhir@gmail.com
 🔗 GitHub: [@sushiva](https://github.com/sushiva)
 
 ---
