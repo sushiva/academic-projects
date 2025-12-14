@@ -1,3 +1,8 @@
+
+<div align="center">
+
+![COVID-19 X-Ray Detection](assets/covid.png)
+
 # 🦠 COVID-19 X-Ray Detection
 
 > Multi-class classification system to detect COVID-19, Viral Pneumonia, and Normal cases from chest X-ray images using deep learning.
@@ -5,11 +10,13 @@
 [![Python](https://img.shields.io/badge/Python-3.13-blue.svg)](https://python.org)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org)
 
+</div>
+
 ---
 
 ## 📋 Project Overview
 
-This project implements a computer vision system to automatically classify chest X-ray images into three categories: COVID-19, Viral Pneumonia, and Normal (healthy). The project uses a **systematic multi-model comparison approach**, implementing 4 different models with increasing complexity.
+This project implements a computer vision system to automatically classify chest X-ray images into three categories: COVID-19, Viral Pneumonia, and Normal (healthy). The project uses a **systematic multi-model comparison approach**, implementing 4 different models with increasing complexity to understand the impact of image preprocessing and neural network architecture.
 
 **🎯 Use Case**: Automated COVID-19 screening and differential diagnosis support for healthcare professionals.
 
@@ -17,11 +24,79 @@ This project implements a computer vision system to automatically classify chest
 
 ## 📊 Dataset
 
-- **Total Images**: TBD
+- **Total Images**: (see data/raw, update with actual count)
 - **Classes**: 3 (COVID-19, Viral Pneumonia, Normal)
-- **Image Type**: Chest X-rays (grayscale)
-- **Distribution**: TBD
-- **Split**: 70/15/15 (train/val/test)
+- **Image Type**: Chest X-rays (grayscale, some RGB)
+- **Distribution**: (update with actual numbers)
+- **Split**:
+	- 🎓 Train: 70%
+	- ✅ Validation: 15%
+	- 🧪 Test: 15%
+
+---
+
+## 🧠 Model Architectures
+
+This project implements **4 different models** to systematically compare approaches:
+
+### Model 1: ANN with RGB Images
+- **Input**: RGB X-ray images
+- **Architecture**: Artificial Neural Network (fully connected)
+- **Config**: `config/model1_ann_rgb.yaml`
+- **Checkpoint**: `models/model1_ann_rgb_best.h5`
+- **Purpose**: Baseline using raw RGB images
+
+### Model 2: ANN with Grayscale Images
+- **Input**: Grayscale X-ray images
+- **Architecture**: Artificial Neural Network (fully connected)
+- **Config**: `config/model2_ann_grayscale.yaml`
+- **Checkpoint**: `models/model2_ann_grayscale_best.h5`
+- **Purpose**: Effect of grayscale preprocessing
+
+### Model 3: ANN with Gaussian-blurred Images
+- **Input**: Gaussian-blurred X-ray images
+- **Architecture**: Artificial Neural Network (fully connected)
+- **Config**: `config/model3_ann_blur.yaml`
+- **Checkpoint**: `models/model3_ann_blur_best.h5`
+- **Purpose**: Effect of blur preprocessing
+
+### Model 4: ANN with Laplacian-filtered Images
+- **Input**: Laplacian-filtered X-ray images
+- **Architecture**: Artificial Neural Network (fully connected)
+- **Config**: `config/model4_ann_laplacian.yaml`
+- **Checkpoint**: `models/model4_ann_laplacian_best.h5`
+- **Purpose**: Effect of edge enhancement
+
+---
+
+## 📁 Project Structure
+
+```
+covid-xray-detection/
+├── assets/                  # Project images and banners
+├── config/                  # Model configurations
+│   ├── model1_ann_rgb.yaml
+│   ├── model2_ann_grayscale.yaml
+│   ├── model3_ann_blur.yaml
+│   └── model4_ann_laplacian.yaml
+├── data/
+│   ├── raw/                # Original X-ray data
+│   └── processed/          # Preprocessed splits
+├── models/                 # Trained model checkpoints
+│   ├── model1_ann_rgb_best.h5
+│   ├── model2_ann_grayscale_best.h5
+│   ├── model3_ann_blur_best.h5
+│   └── model4_ann_laplacian_best.h5
+├── src/
+│   ├── models/            # Model architectures
+│   ├── data.py            # Data loading
+│   ├── train_all_models.py
+│   └── compare_models.py
+├── notebooks/              # EDA and experiments
+├── docs/                   # Documentation
+├── requirements.txt        # Dependencies
+└── train_all_models.sh     # Training script
+```
 
 ---
 
@@ -56,29 +131,6 @@ python src/compare_models.py
 
 ---
 
-## 📁 Project Structure
-
-```
-covid-xray-detection/
-├── config/                  # Model configurations
-├── data/
-│   ├── raw/                # Original X-ray data
-│   └── processed/          # Preprocessed splits
-├── models/                 # Trained model checkpoints
-├── src/
-│   ├── models/            # Model architectures
-│   ├── data.py            # Data loading
-│   ├── train_all_models.py
-│   └── compare_models.py
-├── outputs/
-│   ├── training/
-│   ├── evaluation/
-│   └── comparison/
-└── docs/                   # Documentation
-```
-
----
-
 ## 📝 License
 
 Academic project - for educational purposes only.
@@ -87,6 +139,6 @@ Academic project - for educational purposes only.
 
 ## 👤 Author
 
-**Sudhir Shivaram**
-📧 Email: shivaram.sudhir@gmail.com
+**Sudhir Shivaram**  
+📧 Email: shivaram.sudhir@gmail.com  
 🔗 GitHub: [@sushiva](https://github.com/sushiva)
