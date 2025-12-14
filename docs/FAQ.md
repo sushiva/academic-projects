@@ -508,7 +508,122 @@ find . -name "*.pth"        # Find all model files
 
 ---
 
+## ML Engineering Best Practices
+
+### Q: What's the industry standard for ML configuration management?
+
+**Short Answer**: Separate config files per experiment (what we're using) OR base config + experiment overrides with tools like Hydra.
+
+**Industry Approaches**:
+
+1. **Separate Configs (Current approach - ✅ Recommended for students)**
+   ```
+   config/
+   ├── model1_baseline.yaml
+   ├── model2_transfer.yaml
+   └── model3_optimized.yaml
+   ```
+   - **Used by**: Most companies for clarity
+   - **Pros**: Clear, git-friendly, easy to track experiments
+   - **Cons**: Some duplication of common settings
+
+2. **Hydra (Meta/Facebook standard)**
+   ```
+   config/
+   ├── base.yaml
+   └── experiments/
+       ├── baseline.yaml
+       └── transfer.yaml
+   ```
+   ```bash
+   # Run with overrides
+   python train.py model=resnet18 lr=0.001
+   ```
+   - **Used by**: Meta, Uber, Airbnb
+   - **Pros**: Config composition, command-line overrides
+   - **Cons**: Requires learning Hydra
+
+3. **MLflow (Experiment tracking)**
+   ```python
+   import mlflow
+   mlflow.log_params({"model": "resnet18", "lr": 0.001})
+   ```
+   - **Used by**: Netflix, Databricks
+   - **Pros**: Track and compare experiments
+   - **Cons**: Additional infrastructure
+
+4. **Weights & Biases (Research favorite)**
+   ```python
+   import wandb
+   wandb.init(config={"model": "resnet18"})
+   ```
+   - **Used by**: OpenAI, Toyota Research
+   - **Pros**: Beautiful dashboards, team collaboration
+   - **Cons**: Requires account (free for academics)
+
+**What Big Companies Use**:
+
+| Company | Approach | Tool |
+|---------|----------|------|
+| Google | Separate configs + Protocol Buffers | Internal |
+| Meta | Config composition | Hydra |
+| OpenAI | Separate configs | Custom |
+| Uber | Config composition + Tracking | Hydra + MLflow |
+| Netflix | Experiment tracking | MLflow |
+
+**Our Approach**: Separate configs (industry-standard, simple, clear)
+
+**Best Practices**:
+- ✅ Version control all configs (git)
+- ✅ One config per experiment
+- ✅ Document config changes in commits
+- ✅ Use meaningful names (model1_baseline.yaml)
+- ✅ Add comments explaining unusual values
+- ❌ Don't hardcode parameters in code
+- ❌ Don't mix config and code logic
+- ❌ Don't use environment variables for everything
+
+**For Future Projects**: Consider adding:
+1. **Hydra** for config composition
+2. **MLflow** or **W&B** for experiment tracking
+3. **Pydantic** for config validation
+4. **DVC** for data versioning
+
+**Example Hydra Setup** (for reference):
+```yaml
+# config/base.yaml
+defaults:
+  - data: default
+  - training: default
+
+data:
+  batch_size: 32
+  train_split: 0.7
+
+# config/experiments/resnet.yaml
+defaults:
+  - /base
+
+model:
+  type: ResNet18
+  pretrained: true
+```
+
+```bash
+# Run experiments
+python train.py experiment=resnet
+python train.py experiment=resnet model.pretrained=false  # Override
+```
+
+**Resources**:
+- Hydra: https://hydra.cc/
+- MLflow: https://mlflow.org/
+- Weights & Biases: https://wandb.ai/
+- DVC: https://dvc.org/
+
+---
+
 **Last Updated**: December 2024
-**Version**: 1.0
+**Version**: 1.1
 
 For more detailed instructions, see [SETUP_GUIDE.md](SETUP_GUIDE.md)
