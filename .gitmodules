@@ -1,3 +1,6 @@
 [submodule "academic/academic/covid-xray-detection"]
 	path = academic/academic/covid-xray-detection
 	url = https://github.com/sushiva/covid-xray-detection.git
+[submodule "academic/covid-xray-detection"]
+	path = academic/covid-xray-detection
+	url = https://github.com/sushiva/covid-xray-detection.git
