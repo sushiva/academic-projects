@@ -13,7 +13,7 @@ model:
 
 data:
   images_path: "data/raw/images_proj.npy"
-  labels_path: "data/raw/labels_proj.npy"
+  labels_path: "data/raw/Labels_proj.csv"
   augmentation_level: "light"  # Light augmentation
   train_split: 0.70
   val_split: 0.15
