@@ -1,0 +1,19 @@
+seed: 812
+
+model:
+  name: "model1_ann_rgb"
+  preprocessing_type: "rgb"
+  architecture: "ANN with RGB Images"
+
+data:
+  images_path: "data/raw/CovidImages-1.npy"
+  labels_path: "data/raw/CovidLabels-1.csv"
+  train_split: 0.70
+  val_split: 0.15
+  test_split: 0.15
+
+training:
+  epochs: 15
+  batch_size: 128
+  optimizer: "adam"
+  loss: "categorical_crossentropy"
