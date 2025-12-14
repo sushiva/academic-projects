@@ -69,6 +69,49 @@ This project implements **4 different models** to systematically compare approac
 
 ---
 
+## 🏆 Key Takeaways
+
+- Systematic comparison of preprocessing techniques (RGB, grayscale, blur, edge enhancement) for X-ray image classification.
+- Simple ANNs can achieve strong performance with proper data preparation.
+- Preprocessing can significantly impact model accuracy and generalization.
+- Modular codebase enables easy experimentation and extension.
+
+---
+
+## 📊 Model Comparison
+
+| Model | Preprocessing         | Best Accuracy | Notes                       |
+|-------|----------------------|---------------|-----------------------------|
+| 1     | RGB                  | (fill in)     | Baseline ANN                |
+| 2     | Grayscale            | (fill in)     | Simpler input, less noise   |
+| 3     | Gaussian Blur        | (fill in)     | Smoother, less detail       |
+| 4     | Laplacian (Edges)    | (fill in)     | Edge-focused, more contrast |
+
+> _Update the table with your actual results._
+
+---
+
+## 💡 Best Practices
+
+- Always validate data splits and class balance before training.
+- Use modular configuration files for reproducibility.
+- Track experiments and results for each model variant.
+- Visualize predictions and errors to gain insights.
+- Document all preprocessing and training steps.
+
+---
+
+## 🌍 Real-World Applications
+
+- Rapid COVID-19 screening in clinical settings.
+- Triage support for radiologists and healthcare workers.
+- Research on the impact of preprocessing in medical imaging.
+- Educational tool for deep learning and medical AI.
+
+---
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -142,3 +185,4 @@ Academic project - for educational purposes only.
 **Sudhir Shivaram**  
 📧 Email: shivaram.sudhir@gmail.com  
 🔗 GitHub: [@sushiva](https://github.com/sushiva)
+
