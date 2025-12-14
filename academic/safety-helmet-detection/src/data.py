@@ -33,27 +33,77 @@ class HelmetDataset(Dataset):
 
 
 def get_transforms(config, is_training=True):
-    """Get data transforms based on config"""
+    """
+    Get data transforms based on augmentation level.
 
-    if is_training and config['data']['augmentation']['enabled']:
-        aug_config = config['data']['augmentation']
-        transform = transforms.Compose([
-            transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                               std=[0.229, 0.224, 0.225]),
-            transforms.RandomRotation(aug_config['rotation']),
-            transforms.RandomHorizontalFlip() if aug_config['horizontal_flip'] else transforms.Lambda(lambda x: x),
+    Augmentation Levels:
+        - none: No augmentation (validation/test or baseline training)
+        - light: Minimal augmentation (horizontal flip only)
+        - medium: Moderate augmentation (rotation, flip, color jitter)
+        - heavy: Maximum augmentation (all techniques)
+
+    Args:
+        config: Configuration dictionary
+        is_training: Whether transforms are for training set
+
+    Returns:
+        torchvision.transforms.Compose: Composed transforms
+    """
+
+    # Get augmentation level from config (default to 'medium' for backward compatibility)
+    aug_level = config['data'].get('augmentation_level', 'medium')
+
+    # Base normalization (always applied)
+    normalize = transforms.Normalize(
+        mean=[0.485, 0.456, 0.406],  # ImageNet statistics
+        std=[0.229, 0.224, 0.225]
+    )
+
+    # If not training or no augmentation, return just normalization
+    if not is_training or aug_level == 'none':
+        return transforms.Compose([normalize])
+
+    # Build augmentation based on level
+    if aug_level == 'light':
+        # Light augmentation: Only horizontal flip
+        return transforms.Compose([
+            transforms.RandomHorizontalFlip(p=0.5),
+            normalize
+        ])
+
+    elif aug_level == 'medium':
+        # Medium augmentation: Rotation, flip, color jitter
+        return transforms.Compose([
+            transforms.RandomRotation(15),
+            transforms.RandomHorizontalFlip(p=0.5),
+            transforms.ColorJitter(brightness=0.2, contrast=0.2),
+            normalize
+        ])
+
+    elif aug_level == 'heavy':
+        # Heavy augmentation: All techniques
+        return transforms.Compose([
+            transforms.RandomRotation(30),
+            transforms.RandomHorizontalFlip(p=0.5),
+            transforms.RandomVerticalFlip(p=0.1),
             transforms.ColorJitter(
-                brightness=aug_config['brightness'],
-                contrast=aug_config['contrast']
-            )
-        ])
-    else:
-        transform = transforms.Compose([
-            transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                               std=[0.229, 0.224, 0.225])
+                brightness=0.3,
+                contrast=0.3,
+                saturation=0.2,
+                hue=0.1
+            ),
+            transforms.RandomAffine(
+                degrees=0,
+                translate=(0.1, 0.1),
+                scale=(0.9, 1.1)
+            ),
+            transforms.RandomPerspective(distortion_scale=0.2, p=0.5),
+            normalize
         ])
 
-    return transform
+    else:
+        raise ValueError(f"Unknown augmentation level: {aug_level}. "
+                        f"Choose from: 'none', 'light', 'medium', 'heavy'")
 
 
 def load_and_split_data(config):
@@ -64,8 +114,9 @@ def load_and_split_data(config):
 
     # Load data
     print("Loading dataset...")
-    images_path = project_root / config['data']['raw_images']
-    labels_path = project_root / config['data']['raw_labels']
+    # Support both old and new config formats
+    images_path = project_root / config['data'].get('images_path', config['data'].get('raw_images', 'data/raw/images_proj.npy'))
+    labels_path = project_root / config['data'].get('labels_path', config['data'].get('raw_labels', 'data/raw/labels_proj.csv'))
 
     images = np.load(images_path)
     labels_df = pd.read_csv(labels_path)

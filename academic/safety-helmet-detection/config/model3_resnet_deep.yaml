@@ -1,0 +1,49 @@
+# Model 3: ResNet18 + Deep Classifier
+# Purpose: Show importance of classifier capacity with frozen backbone
+# Expected Accuracy: 95-98%
+# Improvement over Model 2: +5-8%
+
+model:
+  name: "model3_resnet_deep"
+  type: "ResNet18Deep"
+  architecture: "resnet18"
+  num_classes: 2
+  pretrained: true  # Use ImageNet pre-trained weights
+  freeze_backbone: true  # Freeze ResNet18, train deep classifier
+  classifier_layers: [512, 256, 128]  # Deep classifier architecture
+  dropout_rates: [0.5, 0.3, 0.2]  # Dropout for regularization
+
+data:
+  images_path: "data/raw/images_proj.npy"
+  labels_path: "data/raw/labels_proj.npy"
+  augmentation_level: "medium"  # Medium augmentation
+  train_split: 0.70
+  val_split: 0.15
+  test_split: 0.15
+  random_seed: 42
+
+training:
+  batch_size: 32
+  epochs: 30
+  learning_rate: 0.001
+  optimizer: "adam"
+  weight_decay: 0.0001
+  device: "cpu"  # or "cuda" or "mps"
+
+  early_stopping:
+    enabled: true
+    patience: 10
+    min_delta: 0.001
+
+  scheduler:
+    type: "reduce_on_plateau"
+    mode: "min"
+    patience: 5
+    factor: 0.5
+    min_lr: 0.00001
+
+output:
+  models_dir: "models"
+  plots_dir: "outputs/training/plots"
+  logs_dir: "outputs/training/logs"
+  save_best_only: true
