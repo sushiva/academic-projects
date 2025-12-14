@@ -1,3 +1,7 @@
+<div align="center">
+
+![Safety Helmet Detection](assets/helmet_hero.png)
+
 # 🏗️ Safety Helmet Detection
 
 > Binary image classification system to detect whether a person is wearing a safety helmet using deep learning.
@@ -5,6 +9,8 @@
 [![Python](https://img.shields.io/badge/Python-3.13-blue.svg)](https://python.org)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org)
 [![Accuracy](https://img.shields.io/badge/Accuracy-100%25-brightgreen.svg)](https://github.com/sushiva/academic-projects)
+
+</div>
 
 ---
 

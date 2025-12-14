@@ -1,17 +1,61 @@
-# Academic Projects
+<div align="center">
 
-Collection of machine learning and AI projects completed during my academic coursework.
+# 🎓 Academic Projects Portfolio
 
-## Projects
+> Machine Learning & Computer Vision Projects
 
-### 1. Safety Helmet Detection
-Binary image classification system to detect whether a person is wearing a safety helmet using deep learning (ResNet18 transfer learning).
+[![Portfolio](https://img.shields.io/badge/Portfolio-Active-brightgreen)](https://github.com/sushiva/academic-projects)
+[![Python](https://img.shields.io/badge/Python-3.13-blue)](https://python.org)
+[![Deep Learning](https://img.shields.io/badge/Deep%20Learning-PyTorch-red)](https://pytorch.org)
 
-- **Tech Stack**: PyTorch, ResNet18, Python
-- **Dataset**: 631 images (200x200x3)
-- **Accuracy**: 100% (test set)
-- **Location**: [academic/safety-helmet-detection/](academic/safety-helmet-detection/)
-- **Details**: See project [README](academic/safety-helmet-detection/README.md)
+</div>
+
+---
+
+## 📂 Featured Projects
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### 🏗️ [Safety Helmet Detection](https://github.com/sushiva/academic-projects/tree/main/academic/safety-helmet-detection)
+
+[![Helmet Detection](assets/helmet_thumbnail.png)](https://github.com/sushiva/academic-projects/tree/main/academic/safety-helmet-detection)
+
+**Binary image classification for workplace safety compliance**
+
+- ✅ **Accuracy**: 100% (test set)
+- 🧠 **Model**: ResNet18 Transfer Learning
+- 📊 **Dataset**: 631 images (200×200×3)
+- 🚀 **Tech**: PyTorch, torchvision, scikit-learn
+- 🎯 **Use Case**: Automated safety monitoring
+
+**Key Achievement**: 4-model comparison showing transfer learning achieves perfect accuracy with 20,000× fewer parameters than training from scratch.
+
+[📖 View Project →](https://github.com/sushiva/academic-projects/tree/main/academic/safety-helmet-detection)
+
+</td>
+<td width="50%" valign="top">
+
+### 🦠 [COVID-19 X-Ray Classification](https://github.com/sushiva/covid-xray-detection)
+
+[![COVID Detection](assets/covid_thumbnail.png)](https://github.com/sushiva/covid-xray-detection)
+
+**Multi-class X-ray image classification for COVID-19 diagnosis**
+
+- ✅ **Accuracy**: 88.46% (test set)
+- 🧠 **Model**: ANN with RGB preprocessing
+- 📊 **Dataset**: 251 X-ray images (128×128×3)
+- 🚀 **Tech**: TensorFlow, Keras, OpenCV
+- 🎯 **Classes**: COVID-19, Viral Pneumonia, Normal
+
+**Key Achievement**: Systematic comparison of 4 preprocessing techniques showing RGB images outperform grayscale, blur, and edge detection by 27-42%.
+
+[📖 View Project →](https://github.com/sushiva/covid-xray-detection)
+
+</td>
+</tr>
+</table>
 
 ## Setup
 
